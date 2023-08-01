@@ -25,7 +25,7 @@ function validateInput(testInput) {
         return "Empty";
     } else if(isNaN(testInput)) {
         return "Not a Number";
-    } else {
+    } else if(isNaN(testInput) === false){
         return "Is a Number";
     };
 }
@@ -43,14 +43,8 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
     if(validateInput(pilot) === "Empty" || validateInput(copilot) === "Empty" || validateInput(fuelLevel) === "Empty" || validateInput(cargoLevel) === "Empty") {
         window.alert("All fields are required!");
         
-    } else if(validateInput(pilot) === "Is a Number"  || validateInput(copilot) === "Is a Number") {
-        window.alert("Pilot and copilot cannot be numbers.");
-
-    } else if(validateInput(fuelLevel) === "Not a Number") {
-        window.alert("Fuel level must be a number.");
-        
-    } else if(validateInput(cargoLevel) === "Not a Number") {
-        window.alert("Cargo mass must be a number.");
+    } else if(validateInput(pilot) === "Is a Number"  || validateInput(copilot) === "Is a Number" || validateInput(fuelLevel) === "Not a Number" || validateInput(cargoLevel) === "Not a Number") {
+        window.alert("Please enter valid information");
 
     } else {
 
@@ -58,7 +52,6 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
 
     pilotStatus.innerHTML = `Pilot ${pilot} is ready for launch`;
     copilotStatus.innerHTML = `Co-pilot ${copilot} is ready for launch`;
-    
 
     if (fuelLevel <10000 && cargoLevel >10000) {
         fuelStatus.innerHTML = "Fuel level too low for launch";
@@ -93,9 +86,8 @@ function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
 }
 
 async function myFetch() {
-    let planetsReturned;
 
-    planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json").then( function(response) {
+    let planetsReturned = await fetch('https://handlers.education.launchcode.org/static/planets.json').then( function(response) {
             return response.json();
         });
 

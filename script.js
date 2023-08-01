@@ -1,6 +1,5 @@
 // Write your JavaScript code here!
 
-
 window.addEventListener("load", function() {
 
     /* Declare everything for formSubmission function */
